@@ -8,8 +8,8 @@
    Author URI: http://jacobford.com
    */
 
-add_action("wp_ajax_my_user_vote", "loggedin_vote");
-add_action("wp_ajax_nopriv_my_user_vote", "stranger_vote");
+add_action("wp_ajax_dtuc_vote", "loggedin_vote");
+add_action("wp_ajax_nopriv_dtuc_vote", "stranger_vote");
 add_action( 'init', 'my_script_enqueuer' );
 
 function loggedin_vote() {
