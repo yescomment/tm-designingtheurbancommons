@@ -1,6 +1,7 @@
 jQuery(document).ready( function() {
 
-   jQuery(".user_vote").click( function() {
+   jQuery(".user_vote").click( function(evt) {
+      evt.preventDefault();
       post_id = jQuery(this).attr("data-post_id")
       nonce = jQuery(this).attr("data-nonce")
 
