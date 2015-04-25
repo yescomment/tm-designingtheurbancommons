@@ -6,6 +6,5 @@
    Version: 0.1
    Author: Jacob Ford
    Author URI: http://jacobford.com
-   License: Barely any
    */
 ?>
