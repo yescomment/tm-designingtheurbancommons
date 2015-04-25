@@ -11,10 +11,15 @@
 add_action("wp_ajax_my_user_vote", "my_user_vote");
 add_action("wp_ajax_nopriv_my_user_vote", "my_must_login");
 
-function my_user_vote() {
+function loggedin_vote() {
+   echo "You cheater! You work here!";
+   die();
+}
+
+function stranger_vote() {
 
    if ( !wp_verify_nonce( $_REQUEST['nonce'], "my_user_vote_nonce")) {
-      exit("No naughty business please");
+      exit("Don't be naughty. Good design is honest.");
    }   
 
    $vote_count = get_post_meta($_REQUEST["post_id"], "votes", true);
@@ -42,11 +47,6 @@ function my_user_vote() {
 
    die();
 
-}
-
-function my_must_login() {
-   echo "You must log in to vote";
-   die();
 }
 
 ?>
