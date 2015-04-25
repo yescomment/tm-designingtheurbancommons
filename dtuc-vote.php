@@ -47,7 +47,6 @@ function stranger_vote() {
    }
 
    die();
-
 }
 
 function my_script_enqueuer() {
