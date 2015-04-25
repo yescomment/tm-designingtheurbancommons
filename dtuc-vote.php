@@ -8,9 +8,9 @@
    Author URI: http://jacobford.com
    */
 
+add_action( 'init', 'script_enqueuer' );
 add_action("wp_ajax_dtuc_vote", "loggedin_vote");
 add_action("wp_ajax_nopriv_dtuc_vote", "stranger_vote");
-add_action( 'init', 'my_script_enqueuer' );
 
 function loggedin_vote() {
    echo "You cheater! You work here!";
@@ -49,12 +49,12 @@ function stranger_vote() {
    die();
 }
 
-function my_script_enqueuer() {
-   wp_register_script( "my_voter_script", WP_PLUGIN_URL.'/my_plugin/my_voter_script.js', array('jquery') );
-   wp_localize_script( 'my_voter_script', 'myAjax', array( 'ajaxurl' => admin_url( 'admin-ajax.php' )));        
+function script_enqueuer() {
+   wp_register_script( "dtuc_vote_script", WP_PLUGIN_URL.'/dtuc-vote/dtuc_vote_script.js', array('jquery') );
+   wp_localize_script( 'dtuc_vote_script', 'myAjax', array( 'ajaxurl' => admin_url( 'admin-ajax.php' )));        
 
    wp_enqueue_script( 'jquery' );
-   wp_enqueue_script( 'my_voter_script' );
+   wp_enqueue_script( 'dtuc_vote_script' );
 
 }
 
