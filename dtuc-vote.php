@@ -52,10 +52,8 @@ function stranger_vote() {
 function script_enqueuer() {
    wp_register_script( "dtuc_vote_script", WP_PLUGIN_URL.'/dtuc-vote/dtuc_vote_script.js', array('jquery') );
    wp_localize_script( 'dtuc_vote_script', 'myAjax', array( 'ajaxurl' => admin_url( 'admin-ajax.php' )));        
-
    wp_enqueue_script( 'jquery' );
    wp_enqueue_script( 'dtuc_vote_script' );
-
 }
 
 ?>
