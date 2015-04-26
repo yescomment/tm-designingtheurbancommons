@@ -41,7 +41,7 @@ function stranger_vote() {
       exit("Don't be naughty. Good design is honest.");
    }   
 
-   $vote_count = get_post_meta($_REQUEST["post_id"], "meta_vote_count", true);
+   $vote_count = get_post_meta($_REQUEST["post_id"], "meta_vote_count", true); //TODO: Log IP?
    $vote_count = ($vote_count == '') ? 0 : $vote_count;
    $new_vote_count = $vote_count + 1;
 
@@ -69,7 +69,7 @@ function stranger_vote() {
 
 // Add User Votes column in 
 function add_votes_column($cols) {
-   $cols['user_votes'] = 'Votes';
+   $cols['user_votes'] = 'Votes'; //TODO: Narrower width?
    return $cols;
 }
  
