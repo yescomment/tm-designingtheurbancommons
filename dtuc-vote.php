@@ -97,6 +97,7 @@ function orderby_votes($query) {
    }
 }
 
+// Makes Votes column sortable
 function make_votes_col_sortable($cols) {
    $cols['user_votes'] = 'user_votes';
    return $cols;
