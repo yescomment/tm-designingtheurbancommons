@@ -16,18 +16,25 @@ add_action("pre_get_posts", "orderby_votes");
 add_action("manage_pages_custom_column", "populate_votes_column", 10, 2);
 add_filter("manage_edit-page_sortable_columns", "make_votes_col_sortable");
 
+// Get all the JavaScripts ready
 function script_enqueuer() {
+
    wp_register_script( "dtuc_vote_script", WP_PLUGIN_URL.'/dtuc-vote/dtuc_vote_script.js', array('jquery') );
    wp_localize_script( 'dtuc_vote_script', 'myAjax', array( 'ajaxurl' => admin_url( 'admin-ajax.php' )));        
    wp_enqueue_script( 'jquery' );
    wp_enqueue_script( 'dtuc_vote_script' );
+
 }
 
+// Why vote if you're logged in?
 function loggedin_vote() {
+
    echo "You cheater! You work here!";
    die();
+
 }
 
+// Count the hanging chads
 function stranger_vote() {
 
    if ( !wp_verify_nonce( $_REQUEST['nonce'], "my_user_vote_nonce")) {
@@ -60,13 +67,13 @@ function stranger_vote() {
    die();
 }
 
-// ADD NEW COLUMN
+// Add User Votes column in 
 function add_votes_column($cols) {
    $cols['user_votes'] = 'Votes';
    return $cols;
 }
  
-// SHOW THE HANGING CHADS
+// Display vote tallies
 function populate_votes_column($column_name, $post_ID) {
    if ($column_name == 'user_votes') {
       $vote_count = get_post_meta($post_ID, "votes", true);
@@ -76,6 +83,7 @@ function populate_votes_column($column_name, $post_ID) {
    }
 }
 
+// Teach wordpress how to sort by user_votes
 function orderby_votes($query) {
    if( ! is_admin() ) {
       return;
