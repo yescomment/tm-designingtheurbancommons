@@ -98,7 +98,7 @@ function orderby_votes($query) {
 }
 
 function make_votes_col_sortable($cols) {
-   $cols['user_votes'] = 'user_votes'; // TODO: Does this need to be converted to an int for proper sorting?
+   $cols['user_votes'] = 'user_votes';
    return $cols;
 }
 
