@@ -41,25 +41,30 @@ function loggedin_vote() {
 // Count the hanging chads
 function stranger_vote() {
 
-   if ( !wp_verify_nonce( $_REQUEST['nonce'], "my_user_vote_nonce")) {
-      exit("Don't be naughty. Good design is honest.");
-   }   
+   $ipaddress = $_SERVER["REMOTE_ADDR"]; // log user ip
 
-   $vote_count = get_post_meta($_REQUEST["post_id"], "meta_vote_count", true); //TODO: Log IP?
+   if ( !wp_verify_nonce( $_REQUEST['nonce'], "my_user_vote_nonce")) {
+      log_vote("[BAD NONCE] Possible mischief from $ipaddress attempting to vote for" . $_REQUEST["post_id"]);
+      exit("Good design is honest. Don't be dishonest.");
+   }
+
+   $vote_count = get_post_meta($_REQUEST["post_id"], "meta_vote_count", true);
    $vote_count = ($vote_count == '') ? 0 : $vote_count;
    $new_vote_count = $vote_count + 1;
 
    $vote = update_post_meta($_REQUEST["post_id"], "meta_vote_count", $new_vote_count);
 
    if($vote === false) {
-      $result['type'] = "error";
+      $result['type'] = "error"; //TODO: add $result['message']
       $result['vote_count'] = $vote_count;
       $result['error_message'] = "Sorry, there was an error.";
+      log_vote("[ERROR] Vote for " . $_REQUEST["post_id"] . "from $ipaddress not recorded for unknown reason");
    }
    else {
       $result['type'] = "success";
       $result['vote_count'] = $new_vote_count;
       $result['error_message'] = "Voted! No error here!";
+      log_vote("[VOTE] Vote for " . $_REQUEST["post_id"] . " from $ipaddress");
    }
 
    if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
@@ -71,6 +76,16 @@ function stranger_vote() {
    }
 
    die();
+}
+
+// Log vote to help catch evil villians
+function log_vote($message) {
+
+   $filename = WP_PLUGIN_URL.'/dtuc-vote/dtuc_vote_log.txt';
+   $message = $message . '/n';
+
+   file_put_contents($filename, $message);
+
 }
 
 // Add User Votes column in Pages admin
