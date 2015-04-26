@@ -55,7 +55,7 @@ function stranger_vote() {
    $vote = update_post_meta($_REQUEST["post_id"], "meta_vote_count", $new_vote_count);
 
    if($vote === false) {
-      $result['type'] = "error"; //TODO: add $result['message']
+      $result['type'] = "error";
       $result['vote_count'] = $vote_count;
       $result['error_message'] = "Sorry, there was an error.";
       log_vote("[ERROR] Vote for " . $_REQUEST["post_id"] . "from $ipaddress not recorded for unknown reason");
@@ -84,7 +84,7 @@ function log_vote($message) {
    $filename = plugins_url('dtuc_vote_log.txt', __FILE__ );
    $message = $message . '/n';
 
-   file_put_contents($filename, $message);
+   file_put_contents($filename, $message); // I think something about this is why it's not working.
 
 }
 
