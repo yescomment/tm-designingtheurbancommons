@@ -41,11 +41,11 @@ function stranger_vote() {
       exit("Don't be naughty. Good design is honest.");
    }   
 
-   $vote_count = get_post_meta($_REQUEST["post_id"], "votes", true);
+   $vote_count = get_post_meta($_REQUEST["post_id"], "meta_votes", true);
    $vote_count = ($vote_count == '') ? 0 : $vote_count;
    $new_vote_count = $vote_count + 1;
 
-   $vote = update_post_meta($_REQUEST["post_id"], "votes", $new_vote_count);
+   $vote = update_post_meta($_REQUEST["post_id"], "meta_votes", $new_vote_count);
 
    if($vote === false) {
       $result['type'] = "error";
@@ -76,7 +76,7 @@ function add_votes_column($cols) {
 // Display vote tallies
 function populate_votes_column($column_name, $post_ID) {
    if ($column_name == 'user_votes') {
-      $vote_count = get_post_meta($post_ID, "votes", true);
+      $vote_count = get_post_meta($post_ID, "meta_votes", true);
       if ($vote_count) {
          echo $vote_count;
       }
@@ -92,7 +92,7 @@ function orderby_votes($query) {
    $orderby = $query->get('orderby');
 
    if( 'user_votes' == $orderby ) {
-      $query->set('meta_key','votes');
+      $query->set('meta_key','meta_votes');
       $query->set('orderby','meta_value_num');
    }
 }
