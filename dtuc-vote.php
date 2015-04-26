@@ -81,7 +81,7 @@ function stranger_vote() {
 // Log vote to help catch evil villians
 function log_vote($message) {
 
-   $filename = WP_PLUGIN_URL.'/dtuc-vote/dtuc_vote_log.txt';
+   $filename = plugins_url('dtuc_vote_log.txt', __FILE__ );
    $message = $message . '/n';
 
    file_put_contents($filename, $message);
