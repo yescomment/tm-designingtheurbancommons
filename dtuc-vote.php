@@ -8,13 +8,13 @@
    Author URI: http://jacobford.com
    */
 
-add_action( 'init', 'script_enqueuer' );
+add_action("init", "script_enqueuer");
 add_action("wp_ajax_dtuc_vote", "loggedin_vote");
 add_action("wp_ajax_nopriv_dtuc_vote", "stranger_vote");
-add_filter('manage_pages_columns', 'add_votes_column');
-add_action('pre_get_posts', 'orderby_votes' );
-add_action('manage_pages_custom_column', 'populate_votes_column', 10, 2);
-add_filter('manage_edit-page_sortable_columns', 'make_votes_col_sortable' );
+add_filter("manage_pages_columns", "add_votes_column");
+add_action("pre_get_posts", "orderby_votes");
+add_action("manage_pages_custom_column", "populate_votes_column", 10, 2);
+add_filter("manage_edit-page_sortable_columns", "make_votes_col_sortable");
 
 function script_enqueuer() {
    wp_register_script( "dtuc_vote_script", WP_PLUGIN_URL.'/dtuc-vote/dtuc_vote_script.js', array('jquery') );
@@ -62,31 +62,31 @@ function stranger_vote() {
 
 // ADD NEW COLUMN
 function add_votes_column($cols) {
-    $cols['user_votes'] = 'Votes';
-    return $cols;
+   $cols['user_votes'] = 'Votes';
+   return $cols;
 }
  
 // SHOW THE HANGING CHADS
 function populate_votes_column($column_name, $post_ID) {
-    if ($column_name == 'user_votes') {
-        $vote_count = get_post_meta($post_ID, "votes", true);
-        if ($vote_count) {
-            echo $vote_count;
-        }
-    }
+   if ($column_name == 'user_votes') {
+      $vote_count = get_post_meta($post_ID, "votes", true);
+      if ($vote_count) {
+         echo $vote_count;
+      }
+   }
 }
 
 function orderby_votes($query) {
-    if( ! is_admin() ) {
-        return;
-    }
+   if( ! is_admin() ) {
+      return;
+   }
 
-    $orderby = $query->get('orderby');
+   $orderby = $query->get('orderby');
 
-    if( 'user_votes' == $orderby ) {
-        $query->set('meta_key','votes');
-        $query->set('orderby','meta_value_num');
-    }
+   if( 'user_votes' == $orderby ) {
+      $query->set('meta_key','votes');
+      $query->set('orderby','meta_value_num');
+   }
 }
 
 function make_votes_col_sortable($cols) {
