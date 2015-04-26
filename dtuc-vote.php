@@ -17,6 +17,13 @@ function loggedin_vote() {
    die();
 }
 
+function script_enqueuer() {
+   wp_register_script( "dtuc_vote_script", WP_PLUGIN_URL.'/dtuc-vote/dtuc_vote_script.js', array('jquery') );
+   wp_localize_script( 'dtuc_vote_script', 'myAjax', array( 'ajaxurl' => admin_url( 'admin-ajax.php' )));        
+   wp_enqueue_script( 'jquery' );
+   wp_enqueue_script( 'dtuc_vote_script' );
+}
+
 function stranger_vote() {
 
    if ( !wp_verify_nonce( $_REQUEST['nonce'], "my_user_vote_nonce")) {
@@ -47,13 +54,6 @@ function stranger_vote() {
    }
 
    die();
-}
-
-function script_enqueuer() {
-   wp_register_script( "dtuc_vote_script", WP_PLUGIN_URL.'/dtuc-vote/dtuc_vote_script.js', array('jquery') );
-   wp_localize_script( 'dtuc_vote_script', 'myAjax', array( 'ajaxurl' => admin_url( 'admin-ajax.php' )));        
-   wp_enqueue_script( 'jquery' );
-   wp_enqueue_script( 'dtuc_vote_script' );
 }
 
 ?>
