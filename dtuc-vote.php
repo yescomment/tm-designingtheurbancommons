@@ -11,6 +11,8 @@
 add_action( 'init', 'script_enqueuer' );
 add_action("wp_ajax_dtuc_vote", "loggedin_vote");
 add_action("wp_ajax_nopriv_dtuc_vote", "stranger_vote");
+add_filter('manage_pages_columns', 'add_votes_column');
+add_action('manage_pages_custom_column', 'populate_votes_column', 10, 2);
 
 function script_enqueuer() {
    wp_register_script( "dtuc_vote_script", WP_PLUGIN_URL.'/dtuc-vote/dtuc_vote_script.js', array('jquery') );
@@ -54,6 +56,22 @@ function stranger_vote() {
    }
 
    die();
+}
+
+// ADD NEW COLUMN
+function add_votes_column($cols) {
+    $cols['user_votes'] = 'Votes';
+    return $cols;
+}
+ 
+// SHOW THE HANGING CHADS
+function populate_votes_column($column_name, $post_ID) {
+    if ($column_name == 'user_votes') {
+        $vote_count = get_post_meta($post_ID, "votes", true);
+        if ($vote_count) {
+            echo $vote_count;
+        }
+    }
 }
 
 ?>
