@@ -15,6 +15,7 @@ jQuery(document).ready( function() {
                jQuery("#vote_counter").html(response.vote_count)
                document.getElementById("rmpostvote").style.display = 'none'
                document.getElementById("vote-link").className = document.getElementById("vote-link").className.replace( /(?:^|\s)vote(?!\S)/g , 'voted' )
+               document.getElementById("vote-link").href = "#"
             }
             else {
                alert("Something’s gone terrible wrong")
