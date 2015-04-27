@@ -13,6 +13,7 @@ jQuery(document).ready( function() {
          success: function(response) {
             if(response.type == "success") {
                jQuery("#vote_counter").html(response.vote_count)
+               jQuery("#post_vote_counter").html(".")
                document.getElementById("vote-link").className = document.getElementById("vote-link").className.replace( /(?:^|\s)vote(?!\S)/g , 'voted' )
             }
             else {
