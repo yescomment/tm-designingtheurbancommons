@@ -13,6 +13,7 @@ jQuery(document).ready( function() {
          success: function(response) {
             if(response.type == "success") {
                jQuery("#vote_counter").html(response.vote_count)
+               jQuery(".vote").pointerEvents = "none"
             }
             else {
                alert("Something’s gone terrible wrong")
