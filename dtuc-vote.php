@@ -82,9 +82,10 @@ function stranger_vote() {
 function log_vote($message) {
 
    $filename = plugins_url('dtuc_vote_log.txt', __FILE__ );
-   $message = $message . '/n';
+   $timestamp = date("Y m d H:i:s", time());
+   $entry = $timestamp . '  ' . $message . '/n';
 
-   file_put_contents($filename, $message); // I think something about this is why it's not working.
+   file_put_contents($filename, $entry); // I think something about this is why it's not working.
 
 }
 
