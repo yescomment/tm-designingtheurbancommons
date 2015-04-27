@@ -13,9 +13,10 @@ jQuery(document).ready( function() {
          success: function(response) {
             if(response.type == "success") {
                jQuery("#vote_counter").html(response.vote_count)
-               document.getElementById("rmpostvote").style.display = 'none'
+               document.getElementById("rmpostvote").style.display = 'none' //TODO: correct pluralization of "votes"
                document.getElementById("vote-link").className = document.getElementById("vote-link").className.replace( /(?:^|\s)vote(?!\S)/g , 'voted' )
                document.getElementById("vote-link").href = "#"
+               document.getElementById("vote-link").style.pointerEvents = "none"
             }
             else {
                alert("Something’s gone terrible wrong")
