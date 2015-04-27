@@ -13,7 +13,7 @@ jQuery(document).ready( function() {
          success: function(response) {
             if(response.type == "success") {
                jQuery("#vote_counter").html(response.vote_count)
-               jQuery(".vote").pointerEvents = "none"
+               document.getElementById("vote-link").className = document.getElementById("vote-link").className.replace( /(?:^|\s)vote(?!\S)/g , 'voted' )
             }
             else {
                alert("Something’s gone terrible wrong")
