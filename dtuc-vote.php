@@ -31,7 +31,7 @@ function script_enqueuer() {
 function loggedin_vote() {
 
    $result['type'] = "error";
-   $result['error_message'] = "Hey! You work here! No voting for logged-in users."
+   $result['error_message'] = "Hey! You work here! No voting for logged-in users.";
    die();
 
 }
