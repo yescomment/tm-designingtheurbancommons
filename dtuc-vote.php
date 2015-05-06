@@ -86,7 +86,7 @@ function log_vote($message) {
 
    $filename = plugin_dir_path( __FILE__ ) . 'dtuc_vote_log.txt';
    $timestamp = date("Y m d H:i:s", time());
-   $entry = $timestamp . '  ' . $message . /n;
+   $entry = $timestamp . '  ' . $message . "\r\n";
 
    file_put_contents($filename, "FILE_APPEND", $entry); // I think something about this is why it's not working.
 
