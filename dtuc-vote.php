@@ -57,7 +57,7 @@ function stranger_vote() {
    else {
       $result['type'] = "success";
       $result['vote_count'] = $new_vote_count;
-      $result['error_message'] = "Voted! No error here!"
+      $result['error_message'] = "Voted! No error here!";
    }
 
    if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
