@@ -18,7 +18,7 @@ jQuery(document).ready( function() {
                document.getElementById("vote-a").href = "#"
                document.getElementById("vote-a").style.pointerEvents = "none"
             }
-            if(response.type == "error") {
+            else if(response.type == "error") {
                jQuery("#vote-a").html(response.error_message)
                document.getElementById("vote-a").className = document.getElementById("vote-a").className.replace( /(?:^|\s)vote(?!\S)/g , 'vote_error' )
             }
