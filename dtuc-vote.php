@@ -46,7 +46,7 @@ function stranger_vote() {
 
    if ( !wp_verify_nonce( $_REQUEST['nonce'], "my_user_vote_nonce")) {
       log_vote("[BAD NONCE] Possible mischief from $ipaddress attempting to vote for Entry #" . $_REQUEST["post_id"]);
-      exit("Good design is honest. Don't be dishonest.");
+      exit("Seems like you're trying to cheat the voting system. Good design is honest. Don't be dishonest.");
    }
 
    $vote_count = get_post_meta($_REQUEST["post_id"], "meta_vote_count", true);
