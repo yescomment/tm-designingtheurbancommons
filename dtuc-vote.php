@@ -12,6 +12,7 @@ add_action("init", "script_enqueuer");
 add_action("wp_ajax_dtuc_vote", "loggedin_vote");
 add_action("wp_ajax_nopriv_dtuc_vote", "stranger_vote");
 add_filter("manage_pages_columns", "add_votes_column");
+add_action("admin_head", "format_column");
 add_action("pre_get_posts", "orderby_votes");
 add_action("manage_pages_custom_column", "populate_votes_column", 10, 2);
 add_filter("manage_edit-page_sortable_columns", "make_votes_col_sortable");
@@ -71,6 +72,12 @@ function stranger_vote() {
 function add_votes_column($cols) {
    $cols['user_votes'] = 'Votes'; //TODO: Narrower width?
    return $cols;
+}
+
+function format_column() {
+    echo '<style type="text/css">';
+    echo '.column-user_votes { width:5% !important; overflow:hidden }';
+    echo '</style>';
 }
  
 // Display vote tallies
