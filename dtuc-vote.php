@@ -36,7 +36,7 @@ function loggedin_vote() {
    $result['error_message'] = "Hey! You work here! No voting for logged-in users.";
    $result = json_encode($result);
    echo $result;
-   log_vote("[LGIN] Vote for Entry #" . $_REQUEST["post_id"] . " from $ipaddress ignored. User is logged in.");
+   log_vote("[LGIN] Vote for Entry #" . $_REQUEST["post_id"] . " from $ipaddress ignored; user is logged in");
    die();
 
 }
