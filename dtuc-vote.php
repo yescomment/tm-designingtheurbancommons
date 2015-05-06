@@ -34,6 +34,7 @@ function loggedin_vote() {
    $result['error_message'] = "Hey! You work here! No voting for logged-in users.";
    $result = json_encode($result);
    echo $result;
+   log_vote("[BAD NONCE] Possible mischief from $ipaddress attempting to vote for" . $_REQUEST["post_id"]);
    die();
 
 }
