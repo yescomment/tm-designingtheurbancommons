@@ -13,13 +13,13 @@ jQuery(document).ready( function() {
          success: function(response) {
             if(response.type == "success") {
                // jQuery("#vote_counter").html(response.vote_count) | Vote counts no longer displayed
-               jQuery("#vote_text").html("Voted.")
+               jQuery("#vote-container").html("Voted.")
                document.getElementById("vote-link").className = document.getElementById("vote-link").className.replace( /(?:^|\s)vote(?!\S)/g , 'voted' )
                document.getElementById("vote-link").href = "#"
                document.getElementById("vote-link").style.pointerEvents = "none"
             }
             if(response.type == "error") {
-               jQuery("vote-text").html(response.error_message)
+               jQuery("vote-container").html(response.error_message)
                document.getElementById("vote-link").className = document.getElementById("vote-link").className.replace( /(?:^|\s)vote(?!\S)/g , 'vote_error' )
             }
             else {
