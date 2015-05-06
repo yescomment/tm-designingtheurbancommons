@@ -13,14 +13,14 @@ jQuery(document).ready( function() {
          success: function(response) {
             if(response.type == "success") {
                // jQuery("#vote_counter").html(response.vote_count) | Vote counts no longer displayed
-               jQuery("#vote-container").html("Voted.")
-               document.getElementById("vote-link").className = document.getElementById("vote-link").className.replace( /(?:^|\s)vote(?!\S)/g , 'voted' )
-               document.getElementById("vote-link").href = "#"
-               document.getElementById("vote-link").style.pointerEvents = "none"
+               jQuery("#vote-a").html("Voted.")
+               document.getElementById("vote-a").className = document.getElementById("vote-a").className.replace( /(?:^|\s)vote(?!\S)/g , 'voted' )
+               document.getElementById("vote-a").href = "#"
+               document.getElementById("vote-a").style.pointerEvents = "none"
             }
             if(response.type == "error") {
-               jQuery("#vote-container").html(response.error_message)
-               document.getElementById("vote-link").className = document.getElementById("vote-link").className.replace( /(?:^|\s)vote(?!\S)/g , 'vote_error' )
+               jQuery("#vote-a").html(response.error_message)
+               document.getElementById("vote-a").className = document.getElementById("vote-a").className.replace( /(?:^|\s)vote(?!\S)/g , 'vote_error' )
             }
             else {
                alert("Something’s gone terrible wrong")
