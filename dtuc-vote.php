@@ -36,7 +36,7 @@ function loggedin_vote() {
    $result['error_message'] = "Hey! You work here! No voting for logged-in users.";
    $result = json_encode($result);
    echo $result;
-   log_vote("[LOGGED IN] Logged-in user at $ipaddress attempted to vote for " . $_REQUEST["post_id"]);
+   log_vote("[LGIN] Vote for Entry #" . $_REQUEST["post_id"] . " from $ipaddress ignored. User is logged in.");
    die();
 
 }
@@ -47,7 +47,7 @@ function stranger_vote() {
    $ipaddress = $_SERVER["REMOTE_ADDR"]; // log user ip
 
    if ( !wp_verify_nonce( $_REQUEST['nonce'], "my_user_vote_nonce")) {
-      log_vote("[BAD NONCE] Possible mischief from $ipaddress attempting to vote for Entry #" . $_REQUEST["post_id"]);
+      log_vote("[BNON] Possible mischief from $ipaddress attempting to vote for Entry #" . $_REQUEST["post_id"]);
       exit("Seems like you're trying to cheat the voting system. Good design is honest. Don't be dishonest.");
    }
 
@@ -61,7 +61,7 @@ function stranger_vote() {
       $result['type'] = "error";
       $result['vote_count'] = $vote_count;
       $result['error_message'] = "Sorry, there was an error.";
-      log_vote("[ERROR] Vote for Entry #" . $_REQUEST["post_id"] . " from $ipaddress not recorded for unknown reason");
+      log_vote("[ERRR] Vote for Entry #" . $_REQUEST["post_id"] . " from $ipaddress failed for unknown reason");
    }
    else {
       $result['type'] = "success";
@@ -86,7 +86,7 @@ function log_vote($message) {
 
    $filename = plugin_dir_path( __FILE__ ) . 'dtuc_vote_log.txt';
    $timestamp = date("Y m d H:i:s", time());
-   $entry = $timestamp . '  ' . $message . "\r\n";
+   $entry = $timestamp . ' ' . $message . "\r\n";
 
    file_put_contents($filename, $entry, FILE_APPEND | LOCK_EX); // I think something about this is why it's not working.
 
