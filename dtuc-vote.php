@@ -52,7 +52,7 @@ function stranger_vote() {
    if($vote === false) {
       $result['type'] = "error";
       $result['vote_count'] = $vote_count;
-      $result['error_message'] = "Sorry, there was an error."
+      $result['error_message'] = "Sorry, there was an error.";
    }
    else {
       $result['type'] = "success";
