@@ -67,7 +67,7 @@ function stranger_vote() {
    die();
 }
 
-// Add User Votes column in 
+// Add User Votes column in Pages admin
 function add_votes_column($cols) {
    $cols['user_votes'] = 'Votes'; //TODO: Narrower width?
    return $cols;
