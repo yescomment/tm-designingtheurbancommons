@@ -30,6 +30,8 @@ function script_enqueuer() {
 // Block votes if user is logged in
 function loggedin_vote() {
 
+   $ipaddress = $_SERVER["REMOTE_ADDR"]; // log user ip
+
    $result['type'] = "error";
    $result['error_message'] = "Hey! You work here! No voting for logged-in users.";
    $result = json_encode($result);
