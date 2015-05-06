@@ -34,7 +34,7 @@ function loggedin_vote() {
    $result['error_message'] = "Hey! You work here! No voting for logged-in users.";
    $result = json_encode($result);
    echo $result;
-   log_vote("[LOGGED in] Logged-in user at $ipaddress attempted to vote for " . $_REQUEST["post_id"]);
+   log_vote("[LOGGED IN] Logged-in user at $ipaddress attempted to vote for " . $_REQUEST["post_id"]);
    die();
 
 }
@@ -45,7 +45,7 @@ function stranger_vote() {
    $ipaddress = $_SERVER["REMOTE_ADDR"]; // log user ip
 
    if ( !wp_verify_nonce( $_REQUEST['nonce'], "my_user_vote_nonce")) {
-      log_vote("[BAD NONCE] Possible mischief from $ipaddress attempting to vote for" . $_REQUEST["post_id"]);
+      log_vote("[BAD NONCE] Possible mischief from $ipaddress attempting to vote for Entry #" . $_REQUEST["post_id"]);
       exit("Good design is honest. Don't be dishonest.");
    }
 
@@ -59,13 +59,13 @@ function stranger_vote() {
       $result['type'] = "error";
       $result['vote_count'] = $vote_count;
       $result['error_message'] = "Sorry, there was an error.";
-      log_vote("[ERROR] Vote for " . $_REQUEST["post_id"] . "from $ipaddress not recorded for unknown reason");
+      log_vote("[ERROR] Vote for Entry #" . $_REQUEST["post_id"] . " from $ipaddress not recorded for unknown reason");
    }
    else {
       $result['type'] = "success";
       $result['vote_count'] = $new_vote_count;
       $result['error_message'] = "Voted! No error here!";
-      log_vote("[VOTE] Vote for " . $_REQUEST["post_id"] . " from $ipaddress");
+      log_vote("[VOTE] Vote for Entry #" . $_REQUEST["post_id"] . " from $ipaddress");
    }
 
    if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
