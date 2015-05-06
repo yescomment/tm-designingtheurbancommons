@@ -76,7 +76,7 @@ function add_votes_column($cols) {
 
 function format_column() {
     echo '<style type="text/css">';
-    echo '.column-user_votes { width:5% !important; overflow:hidden }';
+    echo '.column-user_votes { width:8% !important; overflow:hidden }';
     echo '</style>';
 }
  
