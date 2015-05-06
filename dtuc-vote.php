@@ -86,7 +86,7 @@ function log_vote($message) {
    $timestamp = date("Y m d H:i:s", time());
    $entry = $timestamp . '  ' . $message . '/n';
 
-   file_put_contents($filename, $entry); // I think something about this is why it's not working.
+   file_put_contents($filename, "FILE_APPEND", $entry); // I think something about this is why it's not working.
 
 }
 
