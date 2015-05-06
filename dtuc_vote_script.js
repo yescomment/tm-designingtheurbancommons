@@ -19,7 +19,7 @@ jQuery(document).ready( function() {
                document.getElementById("vote-link").style.pointerEvents = "none"
             }
             if(response.type == "error") {
-               jQuery("vote-container").html(response.error_message)
+               jQuery("#vote-container").html(response.error_message)
                document.getElementById("vote-link").className = document.getElementById("vote-link").className.replace( /(?:^|\s)vote(?!\S)/g , 'vote_error' )
             }
             else {
