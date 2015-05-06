@@ -81,7 +81,7 @@ function stranger_vote() {
 // Log vote to help catch evil villians
 function log_vote($message) {
 
-   $filename = plugins_url('dtuc_vote_log.txt', __FILE__ );
+   $filename = plugin_dir_path( 'dtuc_vote_log.txt' );
    $timestamp = date("Y m d H:i:s", time());
    $entry = $timestamp . '  ' . $message . '/n';
 
