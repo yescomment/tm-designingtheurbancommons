@@ -12,11 +12,15 @@ jQuery(document).ready( function() {
          data : {action: "dtuc_vote", post_id : post_id, nonce: nonce},
          success: function(response) {
             if(response.type == "success") {
-               jQuery("#vote_counter").html(response.vote_count)
-               document.getElementById("rmpostvote").style.display = 'none' //TODO: correct pluralization of "votes"
+               // jQuery("#vote_counter").html(response.vote_count) | Vote counts no longer displayed
+               jQuery("#vote_text").html(response.error_message)
                document.getElementById("vote-link").className = document.getElementById("vote-link").className.replace( /(?:^|\s)vote(?!\S)/g , 'voted' )
                document.getElementById("vote-link").href = "#"
                document.getElementById("vote-link").style.pointerEvents = "none"
+            }
+            if(response.type == "error") {
+               jQuery("vote_text").html(response.error_message)
+               document.getElementById("vote-link").className = document.getElementById("vote-link").className.replace( /(?:^|\s)vote(?!\S)/g , 'vote_error' )
             }
             else {
                alert("Something’s gone terrible wrong")

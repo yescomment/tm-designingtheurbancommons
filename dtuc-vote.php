@@ -27,10 +27,11 @@ function script_enqueuer() {
 
 }
 
-// Why vote if you're logged in?
+// Block votes if user is logged in
 function loggedin_vote() {
 
-   echo "You cheater! You work here!";
+   $result['type'] = "error";
+   $result['error_message'] = "Hey! You work here! No voting for logged-in users."
    die();
 
 }
@@ -51,10 +52,12 @@ function stranger_vote() {
    if($vote === false) {
       $result['type'] = "error";
       $result['vote_count'] = $vote_count;
+      $result['error_message'] = "Sorry, there was an error."
    }
    else {
       $result['type'] = "success";
       $result['vote_count'] = $new_vote_count;
+      $result['error_message'] = "Voted! No error here!"
    }
 
    if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
