@@ -3,7 +3,7 @@
    Plugin Name: DtUC Vote
    Plugin URI: http://designingtheurbancommons.org
    Description: Custom ballot counter for Designing the Urban Commons voting system.
-   Version: 0.1
+   Version: 1.0
    Author: Jacob Ford
    Author URI: http://jacobford.com
    */
