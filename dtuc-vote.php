@@ -59,7 +59,7 @@ function stranger_vote() {
    if($ipaddress == $lastip) {
       $result['type'] = "error";
       $result['vote_count'] = $vote_count;
-      $result['error_message'] = "Woah there, slow down buckaroo. We know who you are.";
+      $result['error_message'] = "Oy, slow down. We know who you are.";
       log_vote("[RPIP] Vote for Entry #" . $_REQUEST["post_id"] . " from $ipaddress ignored; same IP as previous vote");
    }
    else {
