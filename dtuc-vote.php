@@ -45,6 +45,7 @@ function loggedin_vote() {
 function stranger_vote() {
 
    $ipaddress = $_SERVER["REMOTE_ADDR"]; // log user ip
+   $lastip = get_post_meta($_REQUEST["post_id"], "last_voter_ip", true);
 
    if ( !wp_verify_nonce( $_REQUEST['nonce'], "my_user_vote_nonce")) {
       log_vote("[BNON] Possible mischief from $ipaddress attempting to vote for Entry #" . $_REQUEST["post_id"]);
@@ -55,19 +56,27 @@ function stranger_vote() {
    $vote_count = ($vote_count == '') ? 0 : $vote_count;
    $new_vote_count = $vote_count + 1;
 
-   $vote = update_post_meta($_REQUEST["post_id"], "meta_vote_count", $new_vote_count);
-
-   if($vote === false) {
+   if($ipaddress == $lastip) {
       $result['type'] = "error";
       $result['vote_count'] = $vote_count;
-      $result['error_message'] = "Sorry, there was an error.";
-      log_vote("[ERRR] Vote for Entry #" . $_REQUEST["post_id"] . " from $ipaddress failed for unknown reason");
+      $result['error_message'] = "Woah there, slow down buckaroo. We know who you are.";
+      log_vote("[RPIP] Vote for Entry #" . $_REQUEST["post_id"] . " from $ipaddress ignored; same IP as previous vote");
    }
    else {
-      $result['type'] = "success";
-      $result['vote_count'] = $new_vote_count;
-      $result['error_message'] = "Voted! No error here!";
-      log_vote("[VOTE] Vote for Entry #" . $_REQUEST["post_id"] . " from $ipaddress");
+      $vote = update_post_meta($_REQUEST["post_id"], "meta_vote_count", $new_vote_count);
+      if($vote === false) {
+         $result['type'] = "error";
+         $result['vote_count'] = $vote_count;
+         $result['error_message'] = "Sorry, there was an error.";
+         log_vote("[ERRR] Vote for Entry #" . $_REQUEST["post_id"] . " from $ipaddress failed for unknown reason");
+      }
+      else {
+         $result['type'] = "success";
+         $result['vote_count'] = $new_vote_count;
+         $result['error_message'] = "Voted! No error here!";
+         update_post_meta($_REQUEST['post_id'], "last_voter_ip", $ipaddress);
+         log_vote("[VOTE] Vote for Entry #" . $_REQUEST["post_id"] . " from $ipaddress");
+      }
    }
 
    if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
